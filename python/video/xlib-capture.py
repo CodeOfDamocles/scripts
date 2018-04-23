@@ -1,6 +1,6 @@
 '''                                                                                  
-Records desktop frame buffer on Linux desktops                                       
-and converts data into openCV useable format                                         
+Record desktop frame buffer on Linux desktops                                       
+and convert data into openCV useable format                                         
 '''                                                                                  
 from Xlib import display, X                                                          
 from PIL import Image                                                                
