@@ -1,5 +1,5 @@
 #!/bin/bash
-
+# Get pixel values at given position
 if [ $# -ne 2 ] || ! [[ $1 =~ ^[0-9]+$ ]] || ! [[ $2 =~ ^[0-9]+$ ]]
 then
     echo "Usage gpixat <x> <y>"
