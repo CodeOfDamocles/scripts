@@ -1,0 +1,12 @@
+#!/bin/bash 
+
+# mouse move example
+
+for i in `seq 1 100`;
+do
+    xdotool mousemove 0 $i;
+    for j in `seq 1 100`;
+    do
+	xdotool mousemove $j $i;
+    done
+done
