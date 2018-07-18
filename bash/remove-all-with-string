@@ -1,5 +1,5 @@
 #!/bin/bash
 
-# will remove all files with contain the string
+# will remove all files that contain the string provided 
 # Usage remove-all-with-string "string I don't want"
 grep -l "$1" * | xargs rm
