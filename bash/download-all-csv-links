@@ -1,5 +1,0 @@
-#!/bin/bash
-for i in $(cat f.csv)
-do
-    wget --connect-timeout 2 -t 0 $i
-done
