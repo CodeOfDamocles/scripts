@@ -41,7 +41,7 @@ def dstToScene(p, circles):
 
 def moveVector(origin,direction,speed):
     v1=origin[0] + direction[0] * speed
-    v2=origin[0] + direction[0] * speed
+    v2=origin[1] + direction[1] * speed
     return [v1,v2]
 
 w = pygame.display.set_mode((500,500),0,32)
@@ -53,35 +53,44 @@ direction = [p1[0] / length(p1), p1[1] / length(p1)]
 
 # generate circles for scene 
 mcircles = []
-for i in range(10):
+for i in range(30):
     mcircles.append(Circle())
 
-# main loop
-for i in range(100):
+def drawRayMarch(p1,direction):
+    po = p1
+    print(direction)
+    # main loop
+    for i in range(100):
 
-    smallest = dstToScene(p1, mcircles)
-    
-    print(smallest)
+        smallest = dstToScene(p1, mcircles)
+        
+        #print(smallest)
 
-    # detect hit 
-    if smallest <= 1 or smallest == 500:
-       pygame.gfxdraw.circle(w,  int(p1[0]), int(p1[1]), 5, (255,2,2))
-       break
-    
-    else:
-        pygame.draw.line(w,(25,55,255), p1, direction)
-        pygame.gfxdraw.pixel(w,1,1,(244,2,2))
-        pygame.gfxdraw.circle(w,  int(p1[0]), int(p1[1]), int(smallest)+1, (255,255,255))
-        pygame.gfxdraw.circle(w,  int(p1[0]), int(p1[1]), 1, (255,255,255))
-    
-    p1 = moveVector(p1,direction,smallest)
-    
-    for mcircle in mcircles:    
-        mcircle.draw(pygame,w)
+        # detect hit 
+        if smallest <= 1 or smallest == 500:
+            pygame.gfxdraw.circle(w,  int(p1[0]), int(p1[1]), 2, (255,2,2))
+            break
+        
+        else:
+            pygame.draw.line(w,(25,55,255), p1, po)
+            #pygame.draw.line(w,(25,55,255), [0,0], p1)
+            #pygame.gfxdraw.circle(w,  int(p1[0]), int(p1[1]), int(smallest)+1, (255,255,255))
+            #pygame.gfxdraw.circle(w,  int(p1[0]), int(p1[1]), 1, (255,255,255))
+            pass
+        p1 = moveVector(p1,direction,smallest)
+        
+        for mcircle in mcircles:    
+            mcircle.draw(pygame,w)
 
-    pygame.display.update()
-    time.sleep(0.5)
-    #w.fill((0,0,0))
+        pygame.display.update()
+        time.sleep(0.1)
+        #w.fill((0,0,0))
+
+
+for i in range(1,500,5):
+        direction = [0.0,1.0]
+        drawRayMarch([i,0], direction)
+
 
 pygame.display.update()
 time.sleep(2)
