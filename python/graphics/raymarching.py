@@ -7,8 +7,6 @@ import random
 def length(v):
     return sqrt(v[0]**2 + v[1]**2)
 
-
-
 class Circle:
     def __init__(self):
         self.x = int(random.random() * 500)
@@ -60,11 +58,8 @@ def moveVectorAlongRay(origin,direction,speed):
 w = pygame.display.set_mode((500,500),0,32)
 pygame.display.set_caption('Ray marching')
 
-
 p1 = [10,10]
 direction = [p1[0] / length(p1), p1[1] / length(p1)]
-
-
 
 def drawRay(p1,po,smallest):
     # draw line from origin to current position
@@ -83,9 +78,8 @@ def drawCircles(circles, pygame, w):
 def drawRayMarch(p1,direction):
     # save origin of our vector in po
     po = p1
-
     # print(direction)
-
+    
     while 1:
         
         # check which circle is closests to the point
@@ -110,8 +104,6 @@ def drawRayMarch(p1,direction):
         pygame.display.update()
         time.sleep(0.2)
         #w.fill((0,0,0))
-
-
 
 def generateCircles(n):
     circles = []
