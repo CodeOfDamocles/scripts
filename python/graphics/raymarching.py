@@ -47,10 +47,11 @@ def smallestDistanceToCircle(p, circles):
 
     return distanceToObject
 
-
 def moveVectorAlongRay(origin,direction,speed):
-    # march the point forward by the size returned by
-    # the smallest distance
+    '''
+    march the vector forward by the size returned by
+    value from the smallestDistanceToCircle function 
+    '''
     v1=origin[0] + direction[0] * speed
     v2=origin[1] + direction[1] * speed
     return [v1,v2]
@@ -58,16 +59,21 @@ def moveVectorAlongRay(origin,direction,speed):
 w = pygame.display.set_mode((500,500),0,32)
 pygame.display.set_caption('Ray marching')
 
-p1 = [10,10]
-direction = [p1[0] / length(p1), p1[1] / length(p1)]
+p1 = [10,10] # origin point of the ray march
+direction = [p1[0] / length(p1), p1[1] / length(p1)] # not needed ignore for now
 
 def drawRay(p1,po,smallest):
+    
     # draw line from origin to current position
-    # draw circle showing the distance to the closest circle using the radius
-    # draw a circle with radius of one showing the current position of the vector
     pygame.draw.line(w,(25,55,255), p1, po)  
+    
+    # draw circle showing the distance to the closest circle using the radius
     pygame.gfxdraw.circle(w,  int(p1[0]), int(p1[1]), int(smallest)+1, (255,255,255))
+    
+    # draw a circle with radius of one showing the current position of the vector
     pygame.gfxdraw.circle(w,  int(p1[0]), int(p1[1]), 1, (255,255,255))
+    
+# what is sounds like
 def drawRedCircle(p1):
     pygame.gfxdraw.circle(w,  int(p1[0]), int(p1[1]), 2, (255,2,2))
     
@@ -77,34 +83,29 @@ def drawCircles(circles, pygame, w):
         pass 
 
 def drawRayMarch(p1,direction):
-    # save origin of our vector in po
-    po = p1
-    # print(direction)
+    # save origin of our vector in po (point origin)
+    po = p1 # important 
     
     while 1:
         
         # check which circle is closests to the point
-        smallest = smallestDistanceToCircle(p1, mcircles)
+        smallest = smallestDistanceToCircle(p1, mcircles) # important 
         
-        # if limits are met draw red line to indicate a hit
+        # if limits are met draw red line to indicate a hit/collision
         if smallest <= 1 or smallest >= 500:
             drawRedCircle(p1)
             break
-        
         else:
-            # draw a line and circle showing the position of the vector
-            # and the length to the nearest 
-            drawRay(p1,po,smallest)
+            drawRay(p1,po,smallest) # draw fancy lines and circles showing the ray march
 
         # move the vector along the direction by the smallest distance to a circle
-        p1 = moveVectorAlongRay(p1, direction, smallest)
+        p1 = moveVectorAlongRay(p1, direction, smallest) # important 
         
-        # draw the circles 
+        # draw scene circles 
         drawCircles(mcircles, pygame, w)
         
         pygame.display.update()
-        time.sleep(0.2)
-        #w.fill((0,0,0))
+        time.sleep(0.2) # adjust animation speed
 
 def generateCircles(n):
     circles = []
