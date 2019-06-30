@@ -70,6 +70,7 @@ def drawRay(p1,po,smallest):
     pygame.gfxdraw.circle(w,  int(p1[0]), int(p1[1]), 1, (255,255,255))
 def drawRedCircle(p1):
     pygame.gfxdraw.circle(w,  int(p1[0]), int(p1[1]), 2, (255,2,2))
+    
 def drawCircles(circles, pygame, w):
     for mcircle in circles:    
         mcircle.draw(pygame,w)
